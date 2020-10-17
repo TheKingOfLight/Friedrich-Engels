@@ -1,5 +1,5 @@
 '''-----------------------------------------------------------------
-Python Bot "Friedrich Engels" Version 01.01.01
+Python Bot "Friedrich Engels" Version 01.02.01
 von Mark Rygielski
 
 Aufgabe:
@@ -7,27 +7,32 @@ Unangemessenes Verhalten im Chat erkennen und bestrafen
 Bedeutung der Aufgabe in dieser Version
 Unangemessenes Verhalten: ein geschriebenes Wort ist auf einer Liste
 Bestrafen: im Chat aufmerksam machen
+Aufgabe:
+Im Chat Reaction von Usern auf eine Nachricht erkennen und entsprechende Rolle
+vergeben
 
 Externe Datein (im selben Ordner):
 - .ent mit dem Token
-- Liste mit gebannten Wörtern
 -----------------------------------------------------------------'''
 
 
 #Setup
 #------------------------------------------------------------------
 
-#Globale Variablen
-_blacklistname_ = 'list.txt'
-_command_prefix_ = '~'
-
 #importiere Bibliotheken:
 import discord, os, re
 from dotenv import load_dotenv
 
 #importiere Python skripte
-from testmessage01v02 import testmessage
-from messages01v01 import badmessage
+from moderation.testmessage import testmessage
+from on_reaction_add_role import on_reaction_add_role
+from setup_bot import start
+
+#importiere Benachrichtigungen
+from textoutput.user_messages import badmessage
+
+#importiere Einstellungen
+from serverconfic.server import comandprefix
 
 #importiere Token mithilfe von dotenv:
 load_dotenv()
@@ -41,16 +46,10 @@ def main():
     #client instanz erzeugen:
     client = discord.Client()
 
+    #Stellt den Bot entsprechend ein, gibt Systemnachrichten aus
+    start(client)
 
-    @client.event
-    async def on_ready():
-        '''
-        Läuft, wenn Bot startet / die Verbindung zu Discord herstellt
-        @client.event wird ausgelöst, wenn dass darunter benannte Event eintritt
-        '''
-        print('We have logged in as {0.user}'.format(client))
-
-
+    
     @client.event
     async def on_disconnect():
         #Läuft, die Verbindung zum Server abbricht
@@ -82,6 +81,7 @@ def main():
             print('error')
         else:
             print('error')
+    on_reaction_add_role(client)
     #------------------------------------------------------------------
 
        
