@@ -9,12 +9,12 @@ comandprefix = '~'
 # ROLES = { role_group: { role_name: emote_name, ... }, ... }
 ROLES = {
     'Games': {
-        'WOT': '❌',
-        'Looos': '🙅' 
+        '@everyone': '❌',
+        'Rabauken': '💡',
+        'Genossen': '🙅' 
    },
     'MINT': {
-        'Math': '💡',
-        'Develop': '🔔' 
+        'Developer': '🔔' 
        }
 }
 EMOJI_LIST = ['❌', '🙅', '💡', '🔔' ]

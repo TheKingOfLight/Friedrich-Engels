@@ -33,6 +33,7 @@ from textoutput.user_messages import badmessage
 
 #importiere Einstellungen
 from serverconfic.server import comandprefix
+comand_prefix = str(comandprefix)
 
 #importiere Token mithilfe von dotenv:
 load_dotenv()
@@ -63,7 +64,7 @@ def main():
             #testet, ob der Bot die Nachricht selber gesendet hat
             return
         
-        if message.content.startswith(_command_prefix_):
+        if message.content.startswith(comand_prefix):
             #prüft, ob ein Befehl gegeben wurde
             print ('command')
         
@@ -72,12 +73,12 @@ def main():
         wordList = re.sub("[^\w]", " ",  content).split()
 
         #prüft Nachricht
-        if testmessage(content, _blacklistname_) == 'good':
+        if testmessage(content) == 'good':
             return
-        elif testmessage(content, _blacklistname_) == 'bad':
+        elif testmessage(content) == 'bad':
             print ('bad')
             await message.channel.send(badmessage())
-        elif testmessage(content, _blacklistname_) == 'error':      
+        elif testmessage(content) == 'error':      
             print('error')
         else:
             print('error')

@@ -17,7 +17,7 @@ def start(client):
     async def on_ready():
         print('We have logged in as {0.user}'.format(client))
         txt = startupmessage()
-        channel = client.get_channel(Channel_ID('bot_output'))
+        channel = client.get_channel(int(Channel_ID('bot_output')))
         await channel.send(txt.format(client))
         
 

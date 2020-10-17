@@ -9,7 +9,7 @@ Bedeutung: Geschriebenes mit der Blacklist abgleichen
 
 
 #Setup:
-_blacklistname_ = 'list.txt'
+_blacklistname_ = 'blacklist.txt'
 
 #importiere Bibliotheken:
 import os, re

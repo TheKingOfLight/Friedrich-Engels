@@ -37,7 +37,7 @@ def on_reaction_add_role(client):
     #Daher muss diese nach dem Neustart erneut gesendet werden:
     @client.event
     async def on_ready():
-        channel = client.get_channel(Channel_ID('vote'))
+        channel = client.get_channel(int(Channel_ID('vote')))
         text =  vote_message()
         
         message = await channel.send(text)
@@ -61,8 +61,8 @@ def on_reaction_add_role(client):
             #test, ob der richtige Channel
             return
 
-
-        role = from_reaction_get_role(raction)
+        role_name = from_raction_get_role(reaction)
+        role = discord.utils.get(user.guild.roles, name=role_name)
         try:
             await user.add_roles(role)
             text = str(added_role()+user.name)
