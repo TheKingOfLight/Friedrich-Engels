@@ -21,18 +21,22 @@ Externe Datein (im selben Ordner):
 
 #importiere Bibliotheken:
 import discord, os, re
+from discord.utils import get
 from dotenv import load_dotenv
 
 #importiere Python skripte
 from moderation.testmessage import testmessage
-from on_reaction_add_role import on_reaction_add_role
+from role_management.on_reaction_add_role import on_reaction_add_role
 from setup_bot import start
 
 #importiere Benachrichtigungen
 from textoutput.user_messages import badmessage
+from textoutput.user_messages import bad_message_detected
+from textoutput.error_messages import error1
 
 #importiere Einstellungen
 from serverconfic.server import comandprefix
+from serverconfic.server import give_text_in_bot_channel
 comand_prefix = str(comandprefix)
 
 #importiere Token mithilfe von dotenv:
@@ -76,12 +80,18 @@ def main():
         if testmessage(content) == 'good':
             return
         elif testmessage(content) == 'bad':
-            print ('bad')
-            await message.channel.send(badmessage())
-        elif testmessage(content) == 'error':      
-            print('error')
+            text = str(message.author.name + badmessage())
+            await message.channel.send(text)
+            text = str(message.author.name + bad_message_detected() + \
+                       message.channel.name)
+            await give_text_in_bot_channel(client, text)
+        elif testmessage(content) == 'error':
+            text = error1(7)
+            give_text_in_bot_channel(client, text)
         else:
-            print('error')
+            text = error1(8)
+            give_text_in_bot_channel(client, text)
+            
     on_reaction_add_role(client)
     #------------------------------------------------------------------
 
