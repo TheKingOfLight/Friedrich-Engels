@@ -9,8 +9,11 @@ Enthält alle Textnachrichten
 def badmessage():
     return ', you are bad'
 
-def vote_message():
-    return 'React to vote: \n everybody: ❌ \n Rabauken: 💡 \n Genossen: 🙅 \n Developer: 🔔'
+def vote_message(number):
+    if number == 1:
+        return 'vote here'
+    elif number == 2:
+        return 'here: \n everybody: ❌ \n Rabauken: 💡 \n Genossen: 🙅 \n Developer: 🔔 \n Meth: 🎓' 
 
 def added_role():
     return 'added new role to'

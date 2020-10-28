@@ -15,18 +15,19 @@ async def give_text_in_bot_channel(client, text):
 
 
 
-
+GENERAL_ROLES = ['everybody', 'Rekrut']
 
 comandprefix = '~'
 # ROLES = { role_group: { role_name: emote_name, ... }, ... }
 ROLES = {
     'Games': {
-        'everybody': '❌',
+        'none': '❌',
         'Rabauken': '💡',
-        'Genossen': '🙅' 
+        'Genossen': '🙅',
    },
     'MINT': {
-        'Developer': '🔔' 
+        'Developer': '🔔',
+	'Meth': '🎓' 
        }
 }
-EMOJI_LIST = ['❌', '🙅', '💡', '🔔' ]
+EMOJI_LIST = ['❌', '🙅', '💡', '🔔', '🎓' ]

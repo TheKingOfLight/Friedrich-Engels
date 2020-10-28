@@ -15,6 +15,7 @@ from textoutput.user_messages import added_role
 from textoutput.error_messages import error1
 from serverconfic.server import ROLES
 from serverconfic.server import EMOJI_LIST
+from serverconfic.server import GENERAL_ROLES
 
 from serverconfic.server import give_text_in_bot_channel
 
@@ -54,4 +55,51 @@ def should_ignore_reaction(client, user, reaction):
     else:
         return False
 
+async def give_role(client, user, role, channel, text):
+    if is_blocked_user(user):
+        return
+    if user_has_role(user, role):
+        text = str(already_has_role_text(1) + user.name + \
+            already_has_role_text(2)+ role.name)
+        channel = client.get_channel(int(Channel_ID('vote')))
+        await channel.send(text)
+        channel_name = channel.name
+        text = str(error1(9) + channel_name + text)
+        await give_text_in_bot_channel(client, text)
+        return
+    else:
+        try:
+            await client.add_roles(user, role)
+        except discord.Forbidden:
+            channel = client.get_channel(int(Channel_ID('vote')))
+            await channel.send(error1(6))
+            return
+        except:
+            give_text_in_bot_channel(client, error1(0))
+            return
+        
+        await client.send_message(user, "Added **{}** to active roles ".format(role_to_add))
+        give_text_in_bot_channel(text)
+
+        
+
+
+
+async def give_general_role(client, user, channel):
+    #gives the user the general roles
+    number_roles = len(GENERAL_ROLES)
+    text = ""
+        
+    for i in range(0, number_roles):
+        role_name = str(GENERAL_ROLES[i])
+        role = discord.utils.get(user.guild.roles, name=role_name)
+        vote_channel = client.get_channel(int(Channel_ID('vote')))
+        if not user_has_role(user, role):
+            await give_role(client, user, role, vote_channel, text)
+            
+            
+
+
+
+    
     
