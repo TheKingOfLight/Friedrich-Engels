@@ -28,13 +28,9 @@ def testmessage(content):
     wordList = set( re.sub("[^\w]", " ",  content).split())
     
     #Prüfe auf überschneudung der Liste
-    if len(wordList.intersection(blacklist)) > 0: 
-        #haben Überschneidung --> Nachricht nicht OK
-        return 'bad'
-        
-    elif len(wordList.intersection(blacklist)) == 0:
+    if len(wordList.intersection(blacklist)) == 0:
         #haben keine Übereinstimmung --> Nachricht OK
         return 'good'
-
     else:
-        return 'error'
+        #ansonsten --> Nachricht wird gemeldet
+        return 'bad'
