@@ -25,7 +25,7 @@ from discord.utils import get
 from dotenv import load_dotenv
 
 #importiere Python skripte
-from moderation.testmessage import testmessage
+from moderation.testmessage import isBad
 from role_management.on_reaction_add_role import on_reaction_add_role
 
 #importiere Benachrichtigungen
@@ -69,12 +69,8 @@ def main():
                 #prüft, ob ein Befehl gegeben wurde
                 print ('command')
 
-            #nimmt den Nachrichteninhalt als Liste der Wörter
-            content = message.content
-            wordList = re.sub("[^\w]", " ",  content).split()
-
             #prüft Nachricht
-            if testmessage(content) :
+            if isBad(message.content) :
                 text = str(message.author.name + badmessage())
                 await message.channel.send(text)
                 text = str(message.author.name + bad_message_detected() + \
