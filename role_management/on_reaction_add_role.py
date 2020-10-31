@@ -20,13 +20,14 @@ from serverconfic.server import EMOJI_LIST
 from serverconfic.server import give_text_in_bot_channel
 from serverconfic.ids import Server_ID
 from role_management.untis import from_raction_get_role
+from role_management.untis import give_role
 from role_management.untis import user_has_role
 from role_management.untis import should_ignore_reaction
 from role_management.untis import give_general_role
 from serverconfic.server import give_text_in_bot_channel
 
    
-async def on_reaction_add_role(client):
+def on_reaction_add_role(client):
 
     #Die Nachricht, auf die Reagiert werden soll, muss im Cash sein.
     #Daher muss diese nach dem Neustart erneut gesendet werden:
