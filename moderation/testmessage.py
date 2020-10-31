@@ -17,7 +17,7 @@ import os, re
 
 
 
-def testmessage(content):
+def isBad(message):
 
     #import Blacklist
     with open (_blacklistname_) as data:
@@ -25,7 +25,7 @@ def testmessage(content):
         blacklist = set (re.sub("[^\w]", " ",  blacklist_raw).split())
     
     #convert content into Word-list
-    wordList = set( re.sub("[^\w]", " ",  content).split())
+    content = set( re.sub("[^\w]", " ",  message).split())
     
     #return if content overlaps with blacklist
-    return (len(wordList.intersection(blacklist)) == 0)
+    return (len(content.intersection(blacklist)) != 0)
