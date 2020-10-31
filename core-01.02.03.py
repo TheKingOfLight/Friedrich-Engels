@@ -63,33 +63,23 @@ def main():
     @client.event
     async def on_message(message):
         #läuft, wenn der Bot eine Nachricht erhält
-        if message.author == client.user:
-            #testet, ob der Bot die Nachricht selber gesendet hat
-            return
+        if message.author != client.user:
         
-        if message.content.startswith(comand_prefix):
-            #prüft, ob ein Befehl gegeben wurde
-            print ('command')
-        
-        #nimmt den Nachrichteninhalt als Liste der Wörter
-        content = message.content
-        wordList = re.sub("[^\w]", " ",  content).split()
+            if message.content.startswith(comand_prefix):
+                #prüft, ob ein Befehl gegeben wurde
+                print ('command')
 
-        #prüft Nachricht
-        if testmessage(content) == 'good':
-            return
-        elif testmessage(content) == 'bad':
-            text = str(message.author.name + badmessage())
-            await message.channel.send(text)
-            text = str(message.author.name + bad_message_detected() + \
-                       message.channel.name)
-            await give_text_in_bot_channel(client, text)
-        elif testmessage(content) == 'error':
-            text = error1(7)
-            give_text_in_bot_channel(client, text)
-        else:
-            text = error1(8)
-            give_text_in_bot_channel(client, text)
+            #nimmt den Nachrichteninhalt als Liste der Wörter
+            content = message.content
+            wordList = re.sub("[^\w]", " ",  content).split()
+
+            #prüft Nachricht
+            if testmessage(content) :
+                text = str(message.author.name + badmessage())
+                await message.channel.send(text)
+                text = str(message.author.name + bad_message_detected() + \
+                           message.channel.name)
+                await give_text_in_bot_channel(client, text)
             
     on_reaction_add_role(client)
     #------------------------------------------------------------------
