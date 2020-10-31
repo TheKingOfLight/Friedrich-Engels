@@ -27,10 +27,5 @@ def testmessage(content):
     #convert content into Word-list
     wordList = set( re.sub("[^\w]", " ",  content).split())
     
-    #Prüfe auf überschneudung der Liste
-    if len(wordList.intersection(blacklist)) == 0:
-        #haben keine Übereinstimmung --> Nachricht OK
-        return 'good'
-    else:
-        #ansonsten --> Nachricht wird gemeldet
-        return 'bad'
+    #return if content overlaps with blacklist
+    return (len(wordList.intersection(blacklist)) == 0)
