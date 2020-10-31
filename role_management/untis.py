@@ -75,14 +75,16 @@ async def give_role(client, user, role, channel, text):
             await channel.send(error1(6))
             return
         except:
-            give_text_in_bot_channel(client, error1(0))
+            await give_text_in_bot_channel(client, error1(0))
             return
         
         await client.send_message(user, "Added **{}** to active roles ".format(role_to_add))
         give_text_in_bot_channel(text)
 
         
-
+def is_blocked_user(user):
+    #testet mit Liste ...
+    return False
 
 
 async def give_general_role(client, user, channel):

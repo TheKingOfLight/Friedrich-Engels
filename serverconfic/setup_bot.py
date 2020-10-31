@@ -20,9 +20,21 @@ def welcome_client(client):
         txt = startupmessage()
         channel = client.get_channel(int(Channel_ID('bot_output')))
         await channel.send(txt)
-        print ('1')
         text = ('We have logged in as {0.user}'.format(client))
         await give_text_in_bot_channel(client, text)
+
+
+
+        #leert Channel Wahl
+        print ('Starting cleanup')
+        channel = client.get_channel(int(Channel_ID('vote')))
+        messages = await channel.history().flatten()
+        for message in messages:
+            if message.author.id == client.user.id:
+                author = message.author
+                message.delete()
+                
+        print ('finished cleanup')
         
 
 

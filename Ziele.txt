@@ -1,0 +1,5 @@
+immer everybody, rekrut dabei
+verbesserter Nachrichtentest (extern)
+zweite blacklist
+Reaktion entfernen --> Rolle entfernen
+Automatische Reaktion auf begriffe
