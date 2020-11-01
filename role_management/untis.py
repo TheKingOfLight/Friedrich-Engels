@@ -56,6 +56,8 @@ def should_ignore_reaction(client, user, reaction):
         return False
 
 async def give_role(client, user, role, channel, text):
+
+    #test, ob geben soll
     if is_blocked_user(user):
         return
     if user_has_role(user, role):
@@ -67,21 +69,30 @@ async def give_role(client, user, role, channel, text):
         text = str(error1(9) + channel_name + text)
         await give_text_in_bot_channel(client, text)
         return
+
     else:
         try:
-            await client.add_roles(user, role)
+            await user.add_roles(role)
         except discord.Forbidden:
             channel = client.get_channel(int(Channel_ID('vote')))
             await channel.send(error1(6))
             return
-        except:
-            give_text_in_bot_channel(client, error1(0))
-            return
+        '''except:
+            await give_text_in_bot_channel(client, error1(0))
+            return'''
         
-        await client.send_message(user, "Added **{}** to active roles ".format(role_to_add))
-        give_text_in_bot_channel(text)
+        await channel.send("Added {} to active roles ".format(user.mention))
+        #give_text_in_bot_channel(client, text)
 
-        
+
+def is_blocked_user(user):
+    return False
+
+def user_has_role(user, role):
+    for i in user.roles:
+        if i.name == role or i == role:
+            return True
+    return False
 
 
 
@@ -96,6 +107,7 @@ async def give_general_role(client, user, channel):
         vote_channel = client.get_channel(int(Channel_ID('vote')))
         if not user_has_role(user, role):
             await give_role(client, user, role, vote_channel, text)
+    await channel.send("Added {} to active roles ".format(user.mention))
             
             
 

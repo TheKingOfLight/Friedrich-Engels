@@ -16,7 +16,7 @@ def error1(number):
     if number == 3:
         return
     if number == 4:
-        return
+        return 'Error 104: Don`t have the permission to delete in the channel:'
     if number == 5:
         #
         return "Error 105: Code doesn't work"

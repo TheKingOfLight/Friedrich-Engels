@@ -51,7 +51,9 @@ def main():
     client = discord.Client()
 
     #Stellt den Bot entsprechend ein, gibt Systemnachrichten aus
-    welcome_client(client)
+    @client.event
+    async def on_ready():
+        await welcome_client(client)
 
     
     @client.event

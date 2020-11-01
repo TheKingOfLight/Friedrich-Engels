@@ -11,7 +11,7 @@ def badmessage():
 
 def vote_message(number):
     if number == 1:
-        return 'vote here'
+        return 'Durch das wählen der Rolle stimmst du zu, die Regeln gelesen und akzeptiert zu haben'
     elif number == 2:
         return 'here: \n everybody: ❌ \n Rabauken: 💡 \n Genossen: 🙅 \n Developer: 🔔 \n Meth: 🎓' 
 
@@ -30,3 +30,8 @@ def already_has_role_text(number):
 def bad_message_detected():
     return " wrote a bad message in the channel: "
 
+def allready_has_role_text(num):
+    if num == 1:
+        return "Der Idiot"
+    if num == 2:
+        return "Hat schon die rolle:" 

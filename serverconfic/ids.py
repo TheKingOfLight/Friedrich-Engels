@@ -15,7 +15,7 @@ def Server_ID_test():
 
 def Channel_ID(channel):
     if channel == 'vote':
-        return '766999046056968193'
+        return '772098538426990602'
     elif channel == 'bot_output':
         return '766024050161221724'
 

@@ -23,16 +23,30 @@ from role_management.untis import from_raction_get_role
 from role_management.untis import user_has_role
 from role_management.untis import should_ignore_reaction
 from role_management.untis import give_general_role
+from role_management.untis import give_role
 from serverconfic.server import give_text_in_bot_channel
 
    
-async def on_reaction_add_role(client):
+def on_reaction_add_role(client):
 
     #Die Nachricht, auf die Reagiert werden soll, muss im Cash sein.
     #Daher muss diese nach dem Neustart erneut gesendet werden:
     @client.event
     async def on_ready():
         channel = client.get_channel(int(Channel_ID('vote')))
+
+        #leert den Wahl-Kanal
+        print("Started cleanup")
+        messages = await channel.history(limit=100).flatten()
+        try:
+            await channel.delete_messages(messages)
+            print("Finished cleaning up {} channel".format(client))
+        except discord.Forbidden():
+            text = str(error1('4') + channel.name)
+            give_text_in_bot_channel(client, text)
+        
+
+
         
         try:
             await channel.send(vote_message(1))
@@ -53,7 +67,7 @@ async def on_reaction_add_role(client):
             emoji_name = EMOJI_LIST[i]
             await message.add_reaction(emoji_name)
             #fügt de Nachricht alle emojis hinzu, die benötigt werden
-
+        
 
       
     @client.event
@@ -71,5 +85,3 @@ async def on_reaction_add_role(client):
             
         else:
             return
-
-
